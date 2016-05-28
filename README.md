@@ -1,4 +1,4 @@
-# compareVersions
+# `compareVersions`
 
 This package is in a early stage of development. It provides functionality to compare versions of R packages on CRAN and GitHub.
 
@@ -16,3 +16,7 @@ devtools::install_github("ottlngr/compareVersions")
 library(compareVersions)
 compare_versions("devtools")
 ```
+
+### Please feel free...
+
+... to contribute and to improve `compareVersions`!
