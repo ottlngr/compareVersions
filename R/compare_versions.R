@@ -21,27 +21,27 @@ compare_versions <- function(package) {
     cranurl <- paste("https://cran.r-project.org/web/packages/", package, "/", sep = "")
     cranfile <- getURL(cranurl)
     cranversion <- cranfile %>%
-      str_extract("(?<=Version:</td>\n<td>)[0-9a-zA-Z.-]*")
+      stringr::str_extract("(?<=Version:</td>\n<td>)[0-9a-zA-Z.-]*")
     ghurl <- cranfile %>% str_extract('(?<=URL:</td>\n<td>).*') %>%
-      str_extract('https://github.com.*|http://github.com.*') %>%
-      str_extract('(?<=>).*') %>%
-      str_extract('[^<]*')
+      stringr::str_extract('https://github.com.*|http://github.com.*') %>%
+      stringr::str_extract('(?<=>).*') %>%
+      stringr::str_extract('[^<]*')
     if (is.na(ghurl)) { message(paste("No GitHub URL found in ", package, " index.html @ CRAN.\n", sep = "")) }
     ghversion <- ghurl %>%
-      str_extract("(?<=.com/).*") %>%
+      stringr::str_extract("(?<=.com/).*") %>%
       paste("https://raw.githubusercontent.com/", . , "/master/DESCRIPTION", sep = "") %>%
       getURL() %>%
       str_extract("(?<=Version: ).*")
     if (is.na(ghversion)) { message(print(""))}
   } else {
-    cranversion <- str_extract(package, '(?<=/).*') %>%
+    cranversion <- stringr::str_extract(package, '(?<=/).*') %>%
       paste("https://cran.r-project.org/web/packages/", . , "/", sep = "") %>%
       getURL() %>%
-      str_extract("(?<=Version:</td>\n<td>)[0-9a-zA-Z.-]*")
+      stringr::str_extract("(?<=Version:</td>\n<td>)[0-9a-zA-Z.-]*")
     ghversion <- package %>%
       paste("https://raw.githubusercontent.com/", . , "/master/DESCRIPTION", sep = "") %>%
       getURL() %>%
-      str_extract("(?<=Version: ).*")
+      stringr::str_extract("(?<=Version: ).*")
   }
   table <- data.frame(package, cranversion, ghversion, stringsAsFactors = F) %>%
     `colnames<-`(c("Package", "CRAN", "GitHub"))
