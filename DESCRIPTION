@@ -1,0 +1,14 @@
+Package: compareVersions
+Type: Package
+Title: Compare package versions on CRAN and GitHub
+Version: 0.1.0
+Authors@R: person("Philipp", "Ottolinger", email = "philipp@ottolinger.de", role = c("aut", "cre"))
+Maintainer: Philipp Ottolinger <philipp@ottolinger.de>
+Description: compare_versions() parses the package's index.html on CRAN and
+    looks for the current version as well as URL to a GitHub repo. If the latter
+    is found, compare_versions() tries to read to current package version from the
+    DESCRIPTION file in the repo.
+License: GPL-3
+LazyData: TRUE
+Imports: RCurl, magrittr, stringr
+RoxygenNote: 5.0.1
